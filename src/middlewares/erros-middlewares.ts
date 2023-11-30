@@ -16,10 +16,10 @@ export default function errorHandlingMiddleware(
     return res.status(httpStatus.NOT_FOUND).send(error.message);
   }
 
-  if (error.name === 'invalidIdError') {
+  if (error.name === 'invalidIdError' ) {
     return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error.message);
   }
-  if (error.name === 'duplicatedEmailError') {
+  if (error.name === 'duplicatedEmailError' || 'invalidEmailError' || 'duplicateCredentialError') {
     return res.status(httpStatus.CONFLICT).send(error.message);
   }
 

@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,13 +8,23 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
+  password   String
   Credential Credential[]
   Network    Network[]
+  Session    Session[]
 
   @@map("users")
+}
+
+model Session {
+  id     Int    @id @default(autoincrement())
+  userId Int
+  User   User   @relation(fields: [userId], references: [id])
+  token  String
+
+  @@map("sessions")
 }
 
 model Credential {
@@ -25,7 +34,7 @@ model Credential {
   url      String
   username String
   password String
-  userId Int
+  userId   Int
 
   @@map("credentials")
 }

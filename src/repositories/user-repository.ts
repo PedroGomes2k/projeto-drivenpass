@@ -1,14 +1,23 @@
 import prisma from "@/database/database"
 
-async function findByEmail(email:string){
+async function findByEmail(email: string) {
     return prisma.user.findFirst({
-        where:{
+        where: {
             email
         }
     })
 }
 
+async function createUser(email: string, password: string) {
+    return prisma.user.create({
+        data: {
+            email,
+            password
+        }
+    })
+}
 
 export const userRepository = {
-    findByEmail
+    findByEmail,
+    createUser
 }   
