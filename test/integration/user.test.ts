@@ -1,15 +1,10 @@
 import supertest from 'supertest';
 import httpStatus from 'http-status';
 import { faker } from '@faker-js/faker';
+import { createUser } from '../factory/users-factory';
 import app from '@/app';
-import { cleanDB } from 'test/helpers';
-import { createUser } from 'test/factory/users-factory';
 
 const api = supertest(app);
-
-beforeAll(async () => {
-  await cleanDB();
-});
 
 describe('Post /signup', () => {
   it('Error badrequest when is not give body', async () => {

@@ -11,6 +11,9 @@ export default function errorHandlingMiddleware(
   res: Response,
   next: NextFunction, // eslint-disable-line @typescript-eslint/no-unused-vars
 ) {
+  if (error.name === 'CannotEnrollBeforeStartDateError') {
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }
   if (error.name === 'notFoundError') {
     return res.status(httpStatus.NOT_FOUND).send(error.message);
   }

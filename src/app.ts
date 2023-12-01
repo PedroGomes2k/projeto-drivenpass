@@ -1,9 +1,9 @@
-import express, { json, Request, Response } from 'express';
+import express, { json, Request, Response, Express } from 'express';
 import 'express-async-errors';
 import httpStatus from 'http-status';
-
 import { userRouter, authRouter, networkRouter, credentialRouter } from './routes';
 import errorHandlingMiddleware from './middlewares/erros-middlewares';
+import { connectDb } from './database/database';
 
 const app = express();
 
@@ -18,4 +18,8 @@ app
   .use('/network', networkRouter)
   .use(errorHandlingMiddleware);
 
+export function init(): Promise<Express> {
+  connectDb();
+  return Promise.resolve(app);
+}
 export default app;
