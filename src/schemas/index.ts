@@ -1,3 +1,3 @@
-export * from './sign-schemas'
-export * from './credential-schema'
-export * from './network-schemas'
+export * from './sign-schemas';
+export * from './credential-schema';
+export * from './network-schemas';

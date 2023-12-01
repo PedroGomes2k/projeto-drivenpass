@@ -1,8 +1,8 @@
-import { ApplicationError } from '@/protocols'
+import { ApplicationError } from '@/protocols';
 
 export function unauthorizedError(): ApplicationError {
-    return {
-        name: "unauthorizedError",
-        message: "Your token is invalid"
-    }
+  return {
+    name: 'unauthorizedError',
+    message: 'Your token is invalid',
+  };
 }

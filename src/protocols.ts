@@ -1,19 +1,21 @@
-import { Credential } from "@prisma/client";
+import { Credential, Network } from '@prisma/client';
 
 export type SignUser = {
-    email: string;
-    password: string
-}
+  email: string;
+  password: string;
+};
 
 export type ApplicationError = {
-    name: string;
-    message: string
-}
+  name: string;
+  message: string;
+};
 
 export type DeleteProcess = {
-    id: number
-}
+  id: number;
+};
 
-export type CredentialParams = Omit<Credential, 'id' >
+export type NetworkParams = Omit<Network, 'id'>;
 
-export type CredentialBodyParams = Omit<Credential, 'id' | 'userId'>
+export type CredentialParams = Omit<Credential, 'id'>;
+
+export type CredentialBodyParams = Omit<Credential, 'id' | 'userId'>;

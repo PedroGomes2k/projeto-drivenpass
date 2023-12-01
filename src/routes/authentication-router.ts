@@ -1,12 +1,10 @@
-import { signIn } from "@/controllers";
-import { validateSchemaMiddleware } from "@/middlewares";
-import { createUserSchema } from "@/schemas";
-import { Router } from "express";
+import { Router } from 'express';
+import { signIn } from '@/controllers';
+import { validateSchemaMiddleware } from '@/middlewares';
+import { createUserSchema } from '@/schemas';
 
+const authRouter = Router();
 
+authRouter.post('/', validateSchemaMiddleware(createUserSchema), signIn);
 
-const authRouter = Router()
-
-authRouter.post('/',validateSchemaMiddleware(createUserSchema), signIn)
-
-export default authRouter
+export default authRouter;
