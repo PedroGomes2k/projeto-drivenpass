@@ -1,11 +1,13 @@
-import { credentialService } from './credential-service';
+import Cryptr from 'cryptr';
 import { networkRepository } from '@/repositories';
 import { notFoundError } from '@/erros';
 
 async function createNetwork(userId: number, title: string, network: string, password: string) {
-  const cryptPassword = await credentialService.encryptrPassword(password);
+  const cryptr = new Cryptr(password);
 
-  await networkRepository.createNetwork({ network, title, password: cryptPassword, userId });
+  const encrypt = cryptr.encrypt(password);
+
+  await networkRepository.createNetwork({ network, title, password: encrypt, userId });
 }
 
 async function getAllNetwork(userId: number) {

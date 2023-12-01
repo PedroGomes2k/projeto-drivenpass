@@ -1,10 +1,13 @@
+import Cryptr from 'cryptr';
 import { duplicateCredentialError, notFoundError } from '@/erros';
 import { credentialRepository } from '@/repositories/credential-repository';
 
 async function postCredential(userId: number, title: string, url: string, username: string, password: string) {
   await verifyCredential(userId, title, username);
 
-  const encrypt = await encryptrPassword(password);
+  this.cryptr = new Cryptr(password);
+
+  const encrypt = this.cryptr.encrypt(password);
 
   await credentialRepository.createNewCredential({ title, url, username, password: encrypt, userId });
 }
@@ -12,24 +15,6 @@ async function postCredential(userId: number, title: string, url: string, userna
 async function verifyCredential(userId: number, title: string, username: string) {
   const verifyInfo = await credentialRepository.verifyCredential(userId, title, username);
   if (verifyInfo) throw duplicateCredentialError();
-}
-
-async function encryptrPassword(password: string) {
-  const Cryptr = require('cryptr');
-  const cryptr = new Cryptr(password);
-
-  const encrypt = cryptr.encrypt(password);
-
-  return encrypt;
-}
-
-async function decryptrPassword(password: string) {
-  const Cryptr = require('cryptr');
-  const cryptr = new Cryptr(password);
-
-  const decrypt = cryptr.decrypt(password);
-
-  return decrypt;
 }
 
 async function getCredential(userId: number) {
@@ -58,5 +43,4 @@ export const credentialService = {
   postCredential,
   getCredential,
   deleteCredential,
-  encryptrPassword,
 };

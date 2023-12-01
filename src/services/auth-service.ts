@@ -15,14 +15,13 @@ async function verifyUser(email: string, password: string) {
 
 async function verifyEmail(email: string) {
   const user = await userRepository.findByEmail(email);
-  if (!user) throw invalidEmailError(user.email);
+  if (!user) throw invalidEmailError(email);
 
   return user;
 }
 
 async function verifyPasswordUser(password: string, hash: string) {
   const validatePassword = await bcrypt.compare(password, hash);
-
   if (!validatePassword) throw invalidPasswordError();
 }
 

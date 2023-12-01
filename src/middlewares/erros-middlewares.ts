@@ -14,6 +14,9 @@ export default function errorHandlingMiddleware(
   if (error.name === 'notFoundError') {
     return res.status(httpStatus.NOT_FOUND).send(error.message);
   }
+  if (error.name === 'unauthorizedError') {
+    return res.status(httpStatus.UNAUTHORIZED).send(error.message);
+  }
 
   if (error.name === 'invalidIdError') {
     return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error.message);

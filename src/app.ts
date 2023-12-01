@@ -1,11 +1,9 @@
 import express, { json, Request, Response } from 'express';
 import 'express-async-errors';
 import httpStatus from 'http-status';
-import userRouter from './routes/user-router';
-import authRouter from './routes/authentication-router';
+
+import { userRouter, authRouter, networkRouter, credentialRouter } from './routes';
 import errorHandlingMiddleware from './middlewares/erros-middlewares';
-import credentialRouter from './routes/credential-router';
-import networkRouter from './routes/network-router';
 
 const app = express();
 
