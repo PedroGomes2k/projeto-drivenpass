@@ -14,6 +14,11 @@ export default function errorHandlingMiddleware(
   if (error.name === 'CannotEnrollBeforeStartDateError') {
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }
+  if (error.name === 'JsonWebTokenError') {
+    return res.status(httpStatus.UNAUTHORIZED).send({
+      message: error.message,
+    });
+  }
   if (error.name === 'notFoundError') {
     return res.status(httpStatus.NOT_FOUND).send(error.message);
   }

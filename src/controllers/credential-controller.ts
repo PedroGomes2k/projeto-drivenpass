@@ -5,7 +5,7 @@ import { CredentialBodyParams, DeleteProcess } from '@/protocols';
 import { credentialService } from '@/services';
 
 export async function createCredential(req: AuthenticatedRequest, res: Response) {
-  const userId = Number(req.userId);
+  const { userId } = res.locals;
 
   const { title, url, username, password } = req.body as CredentialBodyParams;
 
@@ -15,15 +15,24 @@ export async function createCredential(req: AuthenticatedRequest, res: Response)
 }
 
 export async function getCredential(req: AuthenticatedRequest, res: Response) {
-  const userId = Number(req.userId);
+  const { userId } = res.locals;
 
   const result = await credentialService.getCredential(userId);
 
   return res.status(httpStatus.OK).send(result);
 }
 
+export async function getCredentialById(req: AuthenticatedRequest, res: Response) {
+  const { userId } = res.locals;
+  const { id } = req.params;
+
+  const result = await credentialService.getCredentialbyId(userId, Number(id));
+
+  return res.status(httpStatus.OK).send(result);
+}
+
 export async function deleteCredential(req: AuthenticatedRequest, res: Response) {
-  const userId = Number(req.userId);
+  const { userId } = res.locals;
 
   const { id } = req.body as DeleteProcess;
 

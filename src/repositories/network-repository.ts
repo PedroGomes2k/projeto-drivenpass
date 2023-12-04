@@ -15,19 +15,17 @@ async function getNetwork(userId: number) {
   });
 }
 
-async function deleteNetwork(userId: number, id: number) {
+async function deleteNetwork(id: number) {
   return prisma.network.delete({
     where: {
       id,
-      userId,
     },
   });
 }
 
-async function verifyNetworkById(userId: number, id: number) {
-  return prisma.network.findMany({
+async function verifyNetworkById(id: number) {
+  return prisma.network.findFirst({
     where: {
-      userId,
       id,
     },
   });

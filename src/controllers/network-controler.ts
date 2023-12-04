@@ -6,7 +6,7 @@ import { networkService } from '@/services';
 import { DeleteProcess } from '@/protocols';
 
 export async function postNetwork(req: AuthenticatedRequest, res: Response) {
-  const userId = Number(req.userId);
+  const { userId } = res.locals;
   const { network, title, password } = req.body as NetworkBodyParams;
 
   await networkService.createNetwork(userId, title, network, password);
@@ -15,14 +15,24 @@ export async function postNetwork(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function getNetwork(req: AuthenticatedRequest, res: Response) {
-  const userId = Number(req.userId);
+  const { userId } = res.locals;
 
   const result = await networkService.getAllNetwork(userId);
 
   return res.status(httpStatus.OK).send(result);
 }
+
+export async function getNetworkById(req: AuthenticatedRequest, res: Response) {
+  const { userId } = res.locals;
+  const { id } = req.params;
+
+  const result = await networkService.getNetworkById(Number(id), userId);
+
+  return res.status(httpStatus.OK).send(result);
+}
+
 export async function deleteNetwork(req: AuthenticatedRequest, res: Response) {
-  const userId = Number(req.userId);
+  const { userId } = res.locals;
 
   const { id } = req.body as DeleteProcess;
 

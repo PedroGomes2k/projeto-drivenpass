@@ -2,7 +2,7 @@ import { Network } from '@prisma/client';
 import Joi from 'joi';
 import { DeleteProcess } from '@/protocols';
 
-export type NetworkBodyParams = Omit<Network, 'id' | 'userId'>;
+export type NetworkBodyParams = Omit<Network, 'id'>;
 
 export const networkBody = Joi.object<NetworkBodyParams>({
   network: Joi.string().required(),

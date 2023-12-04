@@ -11,9 +11,7 @@ async function createNewSession(userId: number, token: string) {
 
 async function findToken(token: string) {
   return prisma.session.findFirst({
-    where: {
-      token,
-    },
+    where: { token },
   });
 }
 

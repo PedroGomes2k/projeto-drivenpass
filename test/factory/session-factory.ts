@@ -11,3 +11,14 @@ export async function createSession(token: string) {
     },
   });
 }
+
+export async function createSessionById(data: DataCreateSession) {
+  return prisma.session.create({
+    data,
+  });
+}
+
+export type DataCreateSession = {
+  token: string;
+  userId: number;
+};

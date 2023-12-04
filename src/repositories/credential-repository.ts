@@ -7,12 +7,10 @@ async function createNewCredential(data: CredentialParams) {
   });
 }
 
-async function verifyCredential(userId: number, title: string, username: string) {
+async function verifyCredential(userId: number, title: string) {
   return prisma.credential.findFirst({
     where: {
-      userId,
-      title,
-      username,
+      AND: { userId, title },
     },
   });
 }
@@ -25,19 +23,17 @@ async function getCredentialById(userId: number) {
   });
 }
 
-async function getCredentialId(userId: number, id: number) {
-  return prisma.credential.findMany({
+async function getCredentialId(id: number) {
+  return prisma.credential.findUnique({
     where: {
-      userId,
       id,
     },
   });
 }
 
-async function deleteCredentialById(id: number, userId: number) {
+async function deleteCredentialById(id: number) {
   return prisma.credential.delete({
     where: {
-      userId,
       id,
     },
   });
